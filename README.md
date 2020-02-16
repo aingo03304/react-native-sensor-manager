@@ -94,7 +94,7 @@ import React, {
   DeviceEventEmitter // will emit events that you can listen to
 } from 'react-native';
 
-import { SensorManager } from 'NativeModules';
+import { NativeModules.SensorManager } from 'react-native';
 ```
 
 
