@@ -40,7 +40,12 @@ public class AccelerometerRecord implements SensorEventListener {
 	public int start(int delay) {
 		this.delay = delay;
 		if (mAccelerometer != null && isRegistered == 0) {
-			mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+			if (delay == 0) {
+				mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+			} else {
+				mSensorManager.registerListener(this, mAccelerometer, delay);
+			}
+
 			isRegistered = 1;
 			return (1);
 		}

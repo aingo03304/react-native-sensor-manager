@@ -38,7 +38,11 @@ public class ThermometerRecord implements SensorEventListener {
 	public int start(int delay) {
 		this.delay = delay;
         if ((mThermometer = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)) != null) {
-			mSensorManager.registerListener(this, mThermometer, SensorManager.SENSOR_DELAY_FASTEST);
+            if (delay == 0) {
+                mSensorManager.registerListener(this, mThermometer, SensorManager.SENSOR_DELAY_FASTEST);
+            } else {
+                mSensorManager.registerListener(this, mThermometer, delay);
+            }
 		} else {
 			return (0);
 		}

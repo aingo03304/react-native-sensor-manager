@@ -37,7 +37,11 @@ public class ProximityRecord implements SensorEventListener {
 	public int start(int delay) {
         this.delay = delay;
         if ((mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)) != null) {
-            mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_FASTEST);
+            if (delay == 0) {
+                mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_FASTEST);
+            } else {
+                mSensorManager.registerListener(this, mProximity, delay);
+            }
             return (1);
         }
         return (0);

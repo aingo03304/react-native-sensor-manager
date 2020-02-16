@@ -38,7 +38,11 @@ public class StepCounterRecord implements SensorEventListener {
 	public int start(int delay) {
 		this.delay = delay;
         if ((mStepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)) != null) {
-			mSensorManager.registerListener(this, mStepCounter, SensorManager.SENSOR_DELAY_FASTEST);
+            if (delay == 0) {
+                mSensorManager.registerListener(this, mStepCounter, SensorManager.SENSOR_DELAY_FASTEST);
+            } else {
+                mSensorManager.registerListener(this, mStepCounter, delay);
+            }
 			return (1);
 		}
 		return (0);

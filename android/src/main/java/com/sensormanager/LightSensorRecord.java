@@ -37,7 +37,11 @@ public class LightSensorRecord implements SensorEventListener {
     public int start(int delay) {
         this.delay = delay;
         if ((mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)) != null) {
-            mSensorManager.registerListener(this, mLightSensor, SensorManager.SENSOR_DELAY_FASTEST);
+            if (delay == 0) {
+                mSensorManager.registerListener(this, mLightSensor, SensorManager.SENSOR_DELAY_FASTEST);
+            } else {
+                mSensorManager.registerListener(this, mLightSensor, delay);
+            }
             return (1);
         }
         return (0);

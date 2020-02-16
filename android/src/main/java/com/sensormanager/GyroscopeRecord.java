@@ -38,7 +38,11 @@ public class GyroscopeRecord implements SensorEventListener {
 	public int start(int delay) {
 		this.delay = delay;
         if ((mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)) != null) {
-			mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_FASTEST);
+            if (delay == 0) {
+                mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_FASTEST);
+            } else {
+                mSensorManager.registerListener(this, mGyroscope, delay);
+            }
 			return (1);
 		}
 		return (0);

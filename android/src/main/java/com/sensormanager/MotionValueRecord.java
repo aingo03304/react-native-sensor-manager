@@ -44,7 +44,11 @@ public class MotionValueRecord implements SensorEventListener {
 	public int start(int delay) {
 		this.delay = delay;
         if ((mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)) != null) {
-			mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+            if (delay == 0) {
+                mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+            } else {
+                mSensorManager.registerListener(this, mAccelerometer, delay);
+            }
 			return (1);
 		}
 		return (0);
